@@ -19,7 +19,6 @@ app.get("/", async (c) => {
   }).$extends(withAccelerate());
 
   const blogs = await prisma.blog.findMany();
-  console.log("hiii", blogs);
   return c.json({ blogs });
 });
 export default app;
