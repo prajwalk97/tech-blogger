@@ -8,6 +8,7 @@ export const blogRouter = new Hono<{
     DATABASE_URL: string;
     JWT_SECRET: string;
   };
+  //this is for getting set variables in middleware
   Variables: {
     userId: string;
   };
@@ -15,10 +16,24 @@ export const blogRouter = new Hono<{
 
 blogRouter.use("/*", async (c, next) => {
   const authHeader = c.req.header("Authorization") || "";
-  const user = await verify(authHeader, c.env.JWT_SECRET);
-  c.set("userId", user.id);
-  console.log(user);
-  await next();
+  try {
+    const user = await verify(authHeader, c.env.JWT_SECRET);
+    if (user) {
+      c.set("userId", user.id);
+      await next();
+
+    }
+    else {
+      return c.json({
+        message: "invalid user creds"
+      })
+    }
+  }
+  catch (e) {
+    return c.json({
+      message: "invalid user creds"
+    })
+  }
 });
 
 blogRouter.post("/", async (c) => {
