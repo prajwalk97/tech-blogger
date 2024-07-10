@@ -16,6 +16,8 @@ export const SignUp = ({ onClickHandler }: { onClickHandler: () => void }) => {
   const postSignUpRequest = async () => {
     try {
       const resp = await axios.post(BACKEND_URL + "/api/v1/user/signup", { ...signUpInput });
+      console.log(resp);
+      localStorage.setItem('jwt', resp.data?.jwt);
       navigateTo("/blogs");
     } catch (error) {
       alert("error while signing up " + error?.message);

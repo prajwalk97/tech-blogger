@@ -11,15 +11,19 @@ export const blogRouter = new Hono<{
   //this is for getting set variables in middleware
   Variables: {
     userId: string;
+    name: string;
   };
 }>();
 
 blogRouter.use("/*", async (c, next) => {
-  const authHeader = c.req.header("Authorization") || "";
+  const authHeader = await c.req.header("Authorization") || "";
+  console.log("hiii", authHeader);
   try {
     const user = await verify(authHeader, c.env.JWT_SECRET);
+    console.log("hiii", user);
     if (user) {
       c.set("userId", user.id);
+      c.set("name", user.name);
       await next();
 
     }
@@ -30,6 +34,7 @@ blogRouter.use("/*", async (c, next) => {
     }
   }
   catch (e) {
+    // c.status(411);
     return c.json({
       message: "invalid user creds"
     })
@@ -52,6 +57,7 @@ blogRouter.post("/", async (c) => {
       title: body.title,
       content: body.content,
       authorId: authorId,
+      authorName: c.get("name"),
     },
   });
   return c.text(blog.id);
@@ -81,7 +87,7 @@ blogRouter.get("/bulk", async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
-
+  console.log("hii");
   const blogs = await prisma.blog.findMany();
   return c.json(blogs);
 });

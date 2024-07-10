@@ -3,7 +3,7 @@ import zod from "zod";
 export const signUpInput = zod.object({
   email: zod.string().email(),
   password: zod.string().min(6),
-  name: zod.string().optional(),
+  name: zod.string(),
 });
 
 export const signInInput = zod.object({

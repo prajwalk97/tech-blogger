@@ -6,7 +6,7 @@ export const TextLabel = ({ classNames, text }: TextLabelType) => {
   return (
     <div
       className={
-        "dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + classNames
+        "dark:border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500 " + classNames
       }
     >
       {text}

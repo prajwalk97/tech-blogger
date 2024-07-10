@@ -24,7 +24,9 @@ userRouter.post("/signup", async (c) => {
   }).$extends(withAccelerate());
 
   try {
+    console.log("hii");
     const body = await c.req.json();
+    console.log(body);
     const { success } = signUpInput.safeParse(body);
     if (!success) {
       c.status(411);
@@ -34,9 +36,12 @@ userRouter.post("/signup", async (c) => {
       data: {
         email: body.email,
         password: body.password,
+        name: body.name,
       },
     });
-    const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
+    console.log(user);
+    const jwt = await sign({ id: user.id, name: user.name }, c.env.JWT_SECRET);
+    console.log(jwt);
     return c.json({
       jwt,
     });
@@ -69,7 +74,7 @@ userRouter.post("/signin", async (c) => {
       message: "no user found",
     });
   }
-  const jwt = verify(user.id, c.env.JWT_SECRET);
+  const jwt = await sign({ id: user.id, name: user.name }, c.env.JWT_SECRET);
   console.log(jwt);
   return c.json({
     jwt,

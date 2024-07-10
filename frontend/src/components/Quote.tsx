@@ -5,7 +5,7 @@ export const Quote = () => {
     <div className="bg-slate-300 dark:bg-slate-700 h-screen flex flex-col justify-center items-center shadow-2xl">
       <div className="max-w-lg flex flex-col">
         <TextLabel
-          classNames="text-3xl font-bold"
+          classNames="text-3xl font-bold dark:text-white"
           text={'"Technology is best when it brings people together"'}
         />
         <div className="text-xl font-semibold mt-5 dark:text-stone-300">
@@ -15,7 +15,7 @@ export const Quote = () => {
           Wordpress | Developer
         </div>
         <TextLabel
-          classNames="text-2xl font-bold mt-5"
+          classNames="text-2xl font-bold mt-5 dark:text-white"
           text={"Blog on... Share on to the world of tech!"}
         />
       </div>
