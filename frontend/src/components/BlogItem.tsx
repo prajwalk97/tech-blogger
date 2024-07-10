@@ -9,7 +9,7 @@ export interface BlogItemProps {
     title: string;
     content: string;
     publishedTime: string;
-    blogItemCLickHandler?: (id: string) => void;
+    blogItemCLickHandler: (id: string) => void;
 }
 export const BlogItem = ({
     id,

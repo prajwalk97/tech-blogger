@@ -5,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 import { FormInput } from "./FormInput";
 import { BACKEND_URL } from "../config";
+import { useDispatch } from "react-redux";
 
 
 
 export const SignIn = ({ onClickHandler }: { onClickHandler: () => void }) => {
     const navigateTo = useNavigate();
+    const dispatch = useDispatch();
     const [signInInput, setSignInInput] = useState<SignInInput>({
         email: "",
         password: "",
@@ -21,6 +23,11 @@ export const SignIn = ({ onClickHandler }: { onClickHandler: () => void }) => {
             const resp = await axios.post(BACKEND_URL + "/api/v1/user/signin", { ...signInInput });
             localStorage.setItem('jwt', resp.data.jwt);
             console.log(resp)
+            dispatch({
+                type: "UPDATE_JWT", payload: {
+                    jwt: resp.data?.jwt
+                }
+            })
             navigateTo("/");
         } catch (error: any) {
             setErrorMessage(error.response?.data?.message)
@@ -68,3 +75,4 @@ export const SignIn = ({ onClickHandler }: { onClickHandler: () => void }) => {
         </>
     );
 };
+
