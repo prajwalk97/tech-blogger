@@ -9,20 +9,21 @@ import { BACKEND_URL } from "../config";
 
 
 export const SignIn = ({ onClickHandler }: { onClickHandler: () => void }) => {
+    const navigateTo = useNavigate();
     const [signInInput, setSignInInput] = useState<SignInInput>({
         email: "",
         password: "",
     });
-    const navigateTo = useNavigate();
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     const postSignUpRequest = async () => {
         try {
             const resp = await axios.post(BACKEND_URL + "/api/v1/user/signin", { ...signInInput });
             localStorage.setItem('jwt', resp.data.jwt);
             console.log(resp)
-            navigateTo("/blogs");
-        } catch (error) {
-            alert("error while signing up " + error?.message);
+            navigateTo("/");
+        } catch (error: any) {
+            setErrorMessage(error.response?.data?.message)
         }
     }
     return (
@@ -33,7 +34,7 @@ export const SignIn = ({ onClickHandler }: { onClickHandler: () => void }) => {
                     Don't have an account?
                     <button
                         onClick={onClickHandler}
-                        className="px-2 font-bold text-neutral-500 underline"
+                        className="px-2 font-bold text-blue-500 underline "
                     >
                         Sign Up
                     </button>
@@ -56,8 +57,9 @@ export const SignIn = ({ onClickHandler }: { onClickHandler: () => void }) => {
                         type="password"
                     />
                 </div>
+                {errorMessage ? <div className="p-2 font-bold text-red-700">{errorMessage}</div> : null}
                 <button className="relative w-3/5 inline-flex items-center justify-center p-1 mt-8 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                    <span className="relative  w-full px-5 p-1.5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-blue-900 rounded-md group-hover:bg-opacity-0"
+                    <span className="relative w-full px-5 p-1.5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-blue-900 rounded-md group-hover:bg-opacity-0"
                         onClick={postSignUpRequest}>
                         Sign In
                     </span>

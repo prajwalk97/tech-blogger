@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { Avatar } from "./Avatar";
 import { Separator } from "./Separator";
 import { TextLabel } from "./TextLabel";
@@ -10,6 +9,7 @@ export interface BlogItemProps {
     title: string;
     content: string;
     publishedTime: string;
+    blogItemCLickHandler?: (id: string) => void;
 }
 export const BlogItem = ({
     id,
@@ -17,14 +17,12 @@ export const BlogItem = ({
     authorName,
     title,
     content,
-    publishedTime
+    publishedTime,
+    blogItemCLickHandler,
 }: BlogItemProps) => {
-    const navigateTo = useNavigate();
-    const blogItemCLickHandler = () => {
-        console.log(id)
-        navigateTo(`/blog/${id}`)
-    }
-    return (<div className="border-b border-slate-300 p-4" onClick={blogItemCLickHandler}>
+
+
+    return (<div className="border-b border-slate-300 p-4" onClick={() => { blogItemCLickHandler?.(id) }}>
         <div className="flex gap-2 items-center">
             <Avatar avatarURL={avatarURL} authorName={authorName.toLocaleUpperCase()} size={"small"} />
             <TextLabel text={authorName} classNames="text-sm font-extralight text-black dark:text-black" />

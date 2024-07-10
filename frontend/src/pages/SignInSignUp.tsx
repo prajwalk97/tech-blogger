@@ -4,7 +4,7 @@ import { Quote } from "../components/Quote";
 import { SetStateAction, useState } from "react";
 
 const SignInSignUp = () => {
-  const [isSignUp, setIsSignUp] = useState<Boolean>(true);
+  const [isSignUp, setIsSignUp] = useState<Boolean>(false);
   const onClickHandler = () => {
     setIsSignUp((prev: SetStateAction<Boolean>) => !prev)
   }

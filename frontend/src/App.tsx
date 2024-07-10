@@ -10,8 +10,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SignInSignUp />} />
-          <Route path="/blogs" element={<BlogsPage />} />
+          <Route path="/" element={<BlogsPage />} />
+          <Route path="/signinsignup" element={<SignInSignUp />} />
           <Route path="/createblog" element={<CreateBlog />} />
           <Route path="/blog/:id" element={<Blog />} />
           <Route path="/publish" element={<Publish />} />
