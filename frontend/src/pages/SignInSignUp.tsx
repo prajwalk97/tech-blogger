@@ -15,7 +15,7 @@ const SignInSignUp = () => {
           <SignUp onClickHandler={onClickHandler} /> :
           <SignIn onClickHandler={onClickHandler} />
         }
-        <div className="invisible lg:visible">
+        <div className="hidden lg:block">
           <Quote />
         </div>
       </div>
