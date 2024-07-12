@@ -44,7 +44,7 @@ export const BlogsPage = () => {
                     <BlogSkeleton />
                     <BlogSkeleton />
                     <BlogSkeleton />
-                </div>) : (<div>
+                </div>) : (<div className="w-3/4 min-w-fit">
                     {blogs ? blogs?.map((blog) => {
                         return <BlogItem id={blog.id} authorName={blog.authorName || "guest user"} title={blog.title} content={blog.content} publishedTime={blog.publishedTime?.split('T')[0] ?? Date.now().toLocaleString()} blogItemCLickHandler={blogItemCLickHandler} />
                     }) : null}
