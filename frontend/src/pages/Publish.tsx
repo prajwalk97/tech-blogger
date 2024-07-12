@@ -3,9 +3,12 @@ import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
 import { BaseScreenWithBackGround } from "../screens/BaseScreenWithBackGround";
+import { useSelector } from "react-redux";
+import { getJwt } from "../reducers";
 
 export const Publish = () => {
     const [title, setTitle] = useState("");
+    const jwt = useSelector((state) => getJwt(state));
     const [description, setDescription] = useState("");
     const navigate = useNavigate();
 
@@ -25,7 +28,7 @@ export const Publish = () => {
                         content: description
                     }, {
                         headers: {
-                            Authorization: localStorage.getItem("jwt")
+                            Authorization: jwt
                         }
                     });
                     console.log(response);
