@@ -1,17 +1,10 @@
 import { AppBar } from "../components/AppBar"
-import { useEffect, useState } from "react";
-import { useJwt } from "react-jwt";
-import { useSelector } from "react-redux";
-import { getJwt } from "../reducers";
-export const BaseScreenWithBackGround = ({ children }: { children: any }) => {
-    const jwt = useSelector((state) => getJwt(state));
-    const { decodedToken }: any = useJwt(jwt || '');
-    const [authorName, setAuthorName] = useState<string>('');
 
-    useEffect(() => {
-        if (decodedToken) setAuthorName(decodedToken?.name);
-        else setAuthorName("guest_user")
-    }, [jwt]);
+import { shallowEqual, useSelector } from "react-redux";
+import { getAuthorName } from "../reducers";
+export const BaseScreenWithBackGround = ({ children }: { children: any }) => {
+    const authorName = useSelector((state) => getAuthorName(state), shallowEqual);
+    console.log("authorname", authorName)
     return (
         <>
             <div className="dark:bg-neutral-200 min-h-screen w-screen">

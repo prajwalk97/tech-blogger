@@ -18,14 +18,16 @@ export const SignIn = ({ onClickHandler }: { onClickHandler: () => void }) => {
     });
     const [errorMessage, setErrorMessage] = useState<string>('');
 
-    const postSignUpRequest = async () => {
+    const postSignInRequest = async () => {
         try {
             const resp = await axios.post(BACKEND_URL + "/api/v1/user/signin", { ...signInInput });
-            localStorage.setItem('jwt', resp.data.jwt);
+            const jwt = resp.data?.jwt;
             console.log(resp)
             dispatch({
                 type: "UPDATE_JWT", payload: {
-                    jwt: resp.data?.jwt
+                    jwt: jwt ?? '',
+                    authorName: resp.data?.name,
+                    isSignedIn: true
                 }
             })
             navigateTo("/");
@@ -67,7 +69,7 @@ export const SignIn = ({ onClickHandler }: { onClickHandler: () => void }) => {
                 {errorMessage ? <div className="p-2 font-bold text-red-700">{errorMessage}</div> : null}
                 <button className="relative w-3/5 inline-flex items-center justify-center p-1 mt-8 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
                     <span className="relative w-full px-5 p-1.5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-blue-900 rounded-md group-hover:bg-opacity-0"
-                        onClick={postSignUpRequest}>
+                        onClick={postSignInRequest}>
                         Sign In
                     </span>
                 </button>

@@ -42,6 +42,7 @@ userRouter.post("/signup", async (c) => {
     console.log(jwt);
     return c.json({
       jwt,
+      name: user.name,
     });
   } catch (e) {
     c.status(403);
@@ -76,5 +77,6 @@ userRouter.post("/signin", async (c) => {
   console.log(jwt);
   return c.json({
     jwt,
+    name: user.name,
   });
 });

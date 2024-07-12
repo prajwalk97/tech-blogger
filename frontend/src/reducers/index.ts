@@ -1,25 +1,46 @@
 import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const initialState = {
-    jwt: ''
+    jwt: '',
+    authorName: 'guest_user',
+    isSignedIn: false
 };
-
-const jwtReducer = (state = initialState, action: { type: string, payload: { jwt: string } }) => {
+type jwtState = {
+    jwt: string;
+    authorName: string;
+    isSignedIn: boolean;
+}
+const authReducer = (state: jwtState = initialState, action: any) => {
     switch (action.type) {
         case "UPDATE_JWT":
-            return { ...state, jwt: action.payload?.jwt };
+            const newState = {
+                ...state,
+                jwt: action.payload?.jwt,
+                authorName: action.payload.authorName,
+                isSignedIn: action.payload.isSignedIn
+            };
+            return newState;
         default:
             return state;
     }
 };
 
 export const getJwt = (state: any) => {
-    return state?.jwt?.jwt;
+    return state.auth.jwt;
+}
+
+export const getIsSignedIn = (state: any) => {
+    return state.auth.isSignedIn;
+}
+
+export const getAuthorName = (state: any) => {
+    return state.auth.authorName;
 }
 // export default jwtReducer;
 const rootReducer = combineReducers({
-    jwt: jwtReducer,
-    // Add other reducers here if you have more
+    auth: persistReducer({ key: 'auth', storage }, authReducer),
 });
 
 export default rootReducer;

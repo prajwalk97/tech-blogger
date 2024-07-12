@@ -5,17 +5,20 @@ import axios from "axios";
 import { Spinner } from "../components/Spinner";
 import { FullBlog } from "../components/FullBlog";
 import { BaseScreenWithBackGround } from "../screens/BaseScreenWithBackGround";
+import { useSelector } from "react-redux";
+import { getJwt } from "../reducers";
 
 // atomFamilies/selectorFamilies
 export const Blog = () => {
   const { id } = useParams();
+  const jwt = useSelector((state) => getJwt(state));
   const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState();
   console.log(id);
   useEffect(() => {
     axios.get(`${BACKEND_URL}/api/v1/blog/${id}`, {
       headers: {
-        Authorization: localStorage.getItem("jwt")
+        Authorization: jwt,
       }
     })
       .then(response => {

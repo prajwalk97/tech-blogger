@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../config";
 import { useDispatch } from "react-redux";
+
 export const SignUp = ({ onClickHandler }: { onClickHandler: () => void }) => {
   const navigateTo = useNavigate();
   const dispatch = useDispatch();
@@ -14,16 +15,17 @@ export const SignUp = ({ onClickHandler }: { onClickHandler: () => void }) => {
     name: "",
   });
   const [errorMessage, setErrorMessage] = useState<string>('');
-
-
   const postSignUpRequest = async () => {
     try {
       const resp = await axios.post(BACKEND_URL + "/api/v1/user/signup", { ...signUpInput });
-      console.log(resp);
-      localStorage.setItem('jwt', resp.data?.jwt);
-      dispatch({type: "UPDATE_JWT", payload: {
-        jwt: resp.data?.jwt
-      }})
+      const jwt = resp.data?.jwt;
+      dispatch({
+        type: "UPDATE_JWT", payload: {
+          jwt: jwt ?? '',
+          authorName: resp.data?.name,
+          isSignedIn: true
+        }
+      })
       navigateTo("/");
     } catch (error: any) {
       setErrorMessage(error.response?.data?.message)
