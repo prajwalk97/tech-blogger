@@ -24,7 +24,7 @@ export const BlogItem = ({
 
     return (
         <div className="border-b border-slate-300 p-4 min-w-full" onClick={() => { blogItemCLickHandler?.(id) }}>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center mb-2">
                 <Avatar avatarURL={avatarURL} authorName={authorName.toLocaleUpperCase()} size={"small"} />
                 <TextLabel text={authorName} classNames="text-sm font-extralight text-black dark:text-black" />
                 <Separator />

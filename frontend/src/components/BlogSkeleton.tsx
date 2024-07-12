@@ -2,9 +2,9 @@ import { Separator } from "./Separator"
 
 export const BlogSkeleton = () => {
     return <div role="status" className="animate-pulse">
-        <div className="p-4 border-b border-slate-400 pb-4 w-screen max-w-screen-md cursor-pointer">
-            <div className="flex">
-                <div className="h-4 w-4 bg-slate-400 rounded-full w-48 mb-4"></div>
+        <div className="p-4 border-b border-slate-400 pb-4 max-w-screen-md cursor-pointer">
+            <div className="flex mb-2">
+                <div className="h-4 w-4 bg-slate-400 rounded-full w-48"></div>
                 <div className="h-2 bg-slate-400 rounded-full mb-2.5"></div>
                 <div className="h-2 bg-slate-400 rounded-full mb-2.5"></div>
                 <div className="flex justify-center flex-col pl-2 flex justify-center flex-col">

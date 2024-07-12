@@ -34,7 +34,7 @@ export const BlogsPage = () => {
     return (
         <BaseScreenWithBackGround>
             <div className="flex flex-col justify-center items-center">
-                {loading ? (<div>
+                { loading ? (<div className="w-3/4">
                     <BlogSkeleton />
                     <BlogSkeleton />
                     <BlogSkeleton />
