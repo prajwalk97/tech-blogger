@@ -37,7 +37,7 @@ export const SignIn = ({ onClickHandler }: { onClickHandler: () => void }) => {
     }
     return (
         <>
-            <div className="h-screen flex flex-col justify-center items-center dark:bg-neutral-200">
+            <div className="flex flex-col justify-center items-center dark:bg-neutral-200">
                 <div className="text-3xl font-extrabold mb-3">Sign into your Account</div>
                 <div className="text-m mb-3 text-neutral-500">
                     Don't have an account?

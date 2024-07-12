@@ -33,7 +33,7 @@ export const SignUp = ({ onClickHandler }: { onClickHandler: () => void }) => {
   }
   return (
     <>
-      <div className="h-screen flex flex-col justify-center items-center dark:bg-neutral-200">
+      <div className="flex flex-col justify-center items-center dark:bg-neutral-200 min-w-full">
         <div className="text-3xl font-extrabold mb-3">Create an Account</div>
         <div className="text-m mb-3 text-neutral-500">
           Already have an account?

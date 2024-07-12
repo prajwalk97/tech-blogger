@@ -10,7 +10,7 @@ const SignInSignUp = () => {
   }
   return (
     <>
-      <div className="grid lg:grid-cols-2">
+      <div className="grid lg:grid-cols-2 h-screen">
         {isSignUp ?
           <SignUp onClickHandler={onClickHandler} /> :
           <SignIn onClickHandler={onClickHandler} />
